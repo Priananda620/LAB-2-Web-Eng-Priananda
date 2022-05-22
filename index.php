@@ -8,6 +8,10 @@
     <title>My Tutor | Priananda </title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
@@ -30,7 +34,7 @@
 
             <div id="login-body">
                 <h2>Login to Your Account</h2>
-                <form enctype="multipart/form-data" class="d-flex flex-column">
+                <form method="POST" enctype="multipart/form-data" class="d-flex flex-column">
                     <label for="username">username&nbsp;<span style="color: red;">*&nbsp;&nbsp;</span></label>
                     <input type="text" name="username" class="form-input" required="">
                     <label for="password">password&nbsp;<span style="color: red;">*&nbsp;&nbsp;</span><span class="show-password float-end">show &nbsp;<i class="fas fa-eye"></i></span></label>
@@ -100,11 +104,11 @@
         </div>
     </div>
     <div id="full-page-container">
-        <header class="d-flex align-items-center">
+        <header class="d-flex align-items-center justify-content-between">
             <div id="header-inner-left">
                 <div class="logo">
                     <a href="#">
-                        <h1 class="fw-bold">My Tutor</h1>
+                        <h1 class="fw-bold d-flex align-items-center"><span><img src="assets/logo/logo48.png"></span>My Tutor</h1>
                     </a>
                 </div>
             </div>
@@ -218,9 +222,9 @@
 
 
         <footer class="p-5">
-            <div class="logo">
+            <div class="logo mb-3">
                 <a href="#">
-                    <h1 class="fw-bold">My Tutor by Priananda</h1>
+                    <h1 class="fw-bold d-flex align-items-center"><span><img src="assets/logo/logo48.png"></span>My Tutor by Priananda</h1>
                 </a>
             </div>
             <div class="d-flex justify-content-between">

@@ -20,9 +20,12 @@
 
 
 /*barlow font*/
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,300;0,400;0,600;1,100;1,300;1,400;1,600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,300;0,400;0,600;1,100;1,300;1,400;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@200;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Poppins:wght@700&family=Rubik:wght@300;600&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@700&display=swap'); */
+
 
 :root {
     --base-color: #1d1d1d;
@@ -103,10 +106,30 @@ section {
     padding: 4em 3vw;
 }
 
+
+
 .logo h1 {
     color: var(--display-font-color);
-    font-family: 'Stint Ultra Expanded';
+    /* font-family: 'Rubik', sans-serif; */
+    font-family: 'Chivo', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
+    /* font-family: 'Barlow', sans-serif !important; */
+    /* font-family: 'Stint Ultra Expanded'; */
+    /* font-size: 1.5em; */
 }
+
+.logo h1{
+    font-size: 3em;
+}
+
+.logo img{
+    width: 1em;
+}
+
+footer .logo h1{
+    font-size: 1.9em;
+}
+
 
 #landing-display-text {
     padding: 4em 0;
