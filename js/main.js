@@ -92,13 +92,14 @@ $(document).ready(() => {
         console.log("REGISTEEERRRR")
         $('#username-already-exist').css('display', 'none')
         $('#unmatch-password').css('display', 'none')
+        $('#no-data').css('display', 'none')
         $('#unmatch-pass-length').css('display', 'none')
         $('button#register-action .fa-2x').css('display', 'none')
 
         $('#SUCCESS-regis').css('display', 'none')
 
 
-        let form = $("#register-body form")[0];
+        let form = $("#register-body form")[0]
         let fd = new FormData(form)
 
 
@@ -112,15 +113,8 @@ $(document).ready(() => {
                 // console.log(reader.result)
                 fd.delete("user_image64")
                 fd.append("user_image64", reader.result)
-
-
                 console.log(fd.get('user_image64'))
-
-                
                 console.log(fd.get("email"))
-
-                
-
 
                 $.ajax({
                     url: 'api/register.php',
@@ -138,6 +132,11 @@ $(document).ready(() => {
                             console.log(json.account_data);
                             $('#SUCCESS-regis').css('display', 'unset')
                             // location.reload();
+                        } else if (!json.success && json.no_data) {
+                            console.log(json.success);
+                            console.log("no_data:")
+                            console.log(json.no_data)
+                            $('#no-data').css('display', 'unset')
                         } else if (!json.success && json.password_verify_unmatch) {
                             console.log(json.success);
                             console.log("password_verify_unmatch:")
@@ -163,6 +162,7 @@ $(document).ready(() => {
             reader.readAsDataURL(fd.get('user_image64'))
 
         } else {
+            $('#no-data').css('display', 'unset')
             return
         }
     })

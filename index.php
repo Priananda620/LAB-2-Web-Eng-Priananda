@@ -82,6 +82,7 @@
                     <p id="SUCCESS-regis" class="mt-4" style="display: none">SUCCESS REGISTER, you can check out on the db sir, no user session created.</p>
                     <p id="username-already-exist" class="mt-4" style="display: none">Username Already Exist...</p>
                     <p id="unmatch-password" class="mt-4" style="display: none">Password Does Not Match...</p>
+                    <p id="no-data" class="mt-4" style="display: none">Input Must Be Filled</p>
                     <p id="unmatch-pass-length" class="mt-4" style="display: none">Password Too Short...</p>
 
                     <div class="d-inline-flex align-items-center flex-wrap mt-4">
