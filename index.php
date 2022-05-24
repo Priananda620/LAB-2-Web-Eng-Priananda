@@ -223,7 +223,7 @@
 
 
         <footer class="p-5">
-            <div class="logo mb-3">
+            <div style="border-bottom: 1px solid var(--display-font-color-2nd);" class="logo mb-4 pb-3">
                 <a href="#">
                     <h1 class="fw-bold d-flex align-items-center"><span><img src="assets/logo/logo48.png"></span>My Tutor by Priananda</h1>
                 </a>
