@@ -1,3 +1,16 @@
+function clearMsgOutput() {
+    console.log("dsadsdda")
+    $('#username-already-exist').css('display', 'none')
+    $('#unmatch-password').css('display', 'none')
+    $('#no-data').css('display', 'none')
+    $('#unmatch-pass-length').css('display', 'none')
+    $('button#register-action .fa-2x').css('display', 'none')
+
+    $('#SUCCESS-regis').css('display', 'none')
+}
+
+
+
 $(document).ready(() => {
     var r = document.querySelector(':root');
 
@@ -52,6 +65,8 @@ $(document).ready(() => {
         $("#login-body").removeClass("d-none")
         $("#overlay-outter").removeClass("align-items-start")
         $("#overlay-outter").addClass("align-items-center")
+
+        clearMsgOutput()
     })
 
 
@@ -63,6 +78,9 @@ $(document).ready(() => {
         $("#register-body").removeClass("d-none")
         $("#overlay-outter").addClass("align-items-start")
         $("#overlay-outter").removeClass("align-items-center")
+
+        clearMsgOutput()
+
     })
 
     $("#xmark-button").on('click', (e) => {
@@ -90,14 +108,7 @@ $(document).ready(() => {
 
     $("button#register-action").on('click', (e) => {
         console.log("REGISTEEERRRR")
-        $('#username-already-exist').css('display', 'none')
-        $('#unmatch-password').css('display', 'none')
-        $('#no-data').css('display', 'none')
-        $('#unmatch-pass-length').css('display', 'none')
-        $('button#register-action .fa-2x').css('display', 'none')
-
-        $('#SUCCESS-regis').css('display', 'none')
-
+        clearMsgOutput()
 
         let form = $("#register-body form")[0]
         let fd = new FormData(form)
