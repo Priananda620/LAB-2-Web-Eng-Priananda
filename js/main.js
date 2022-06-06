@@ -5,7 +5,11 @@ function clearMsgOutput() {
     $('#no-data').css('display', 'none')
     $('#unmatch-pass-length').css('display', 'none')
     $('button#register-action .fa-2x').css('display', 'none')
+    
+    $('#wrong_password').css('display', 'none')
+    $('#email_not_registered').css('display', 'none')
 
+    $('#SUCCESS-login').css('display', 'none')
     $('#SUCCESS-regis').css('display', 'none')
 }
 
@@ -93,7 +97,7 @@ $(document).ready(() => {
     $(".clear-input-action").on('click', function (e) {
         e.preventDefault()
         $("#overlay-wrapper form input").val("")
-        $("#overlay-wrapper form input").val("")
+        $("#overlay-wrapper textarea").val("")
     })
 
     $(".show-password").on('click', () => {
@@ -171,6 +175,74 @@ $(document).ready(() => {
                 })
             }
             reader.readAsDataURL(fd.get('user_image64'))
+
+        } else {
+            $('#no-data').css('display', 'unset')
+            return
+        }
+    })
+
+    $("button#login-action").on('click', (e) => {
+        console.log("LOGGIIIIIN")
+        clearMsgOutput()
+
+        let form = $("#login-body form")[0]
+        let fd = new FormData(form)
+
+
+        if (fd.get('email') != "" && fd.get('password') != "") {
+
+            $('.fa-2x').addClass("d-block")
+            e.preventDefault();
+
+            // if(fd.get('remember') == null){
+            //     fd.set('remember') == "off"
+            // }
+
+            console.log(fd.get('remember'))
+
+            // console.log(reader.result)
+            console.log(fd.get('email'))
+            console.log(fd.get("password"))
+
+            $.ajax({
+                url: 'api/login.php',
+                method: 'POST',
+                data: fd,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    $('.fa-2x').removeClass("d-block")
+                    let json = response
+                    console.log(json)
+
+                    if (json.success) {
+                        console.log(json.success);
+                        console.log(json.account_data);
+                        $('#SUCCESS-login').css('display', 'unset')
+                        // location.reload();
+                    } else if (!json.success && json.no_data) {
+                        
+                        console.log(json.success);
+                        console.log("no_data:")
+                        console.log(json.no_data)
+
+                        $('#no-data').css('display', 'unset')
+                    } else if (!json.success && json.email_not_registered) {
+                        console.log(json.success);
+                        console.log("email_not_registered:")
+                        console.log(json.email_not_registered)
+                        
+                        $('#email_not_registered').css('display', 'unset')
+                    } else if (!json.success && json.wrong_password) {
+                        console.log(json.success);
+                        console.log("wrong_password:")
+                        console.log(json.wrong_password);
+                        $('#wrong_password').css('display', 'unset');
+                    }
+                }
+            })
+  
 
         } else {
             $('#no-data').css('display', 'unset')

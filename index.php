@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,19 +36,30 @@
             <div id="login-body">
                 <h2>Login to Your Account</h2>
                 <form method="POST" enctype="multipart/form-data" class="d-flex flex-column">
-                    <label for="username">username&nbsp;<span style="color: red;">*&nbsp;&nbsp;</span></label>
-                    <input type="text" name="username" class="form-input" required="">
+                    <label for="email">email&nbsp;<span style="color: red;">*&nbsp;&nbsp;</span></label>
+                    <input type="email" name="email" class="form-input" required="">
                     <label for="password">password&nbsp;<span style="color: red;">*&nbsp;&nbsp;</span><span class="show-password float-end">show &nbsp;<i class="fas fa-eye"></i></span></label>
                     <input type="password" name="password" class="form-input" required="">
 
-                    <p id="" class="mt-4">Login unavailable (LAB 2 assignment)<br>Only register working for now | <span class="register-show" style="color:var(--link-font); cursor:pointer">Register</span> </p>
-                    <!-- <p id="username-not-exist" class="mt-4" style="display: none">Username Not Exist...</p> -->
-                    <!-- <p id="incorrect-password" class="mt-4" style="display: none">Incorrect Password...</p> -->
+
+                    <div>
+                        <input style="width: fit-content" id="form-remember-me" type="checkbox" name="remember" class="form-input" required="">
+                        <label for="form-remember-me">remember me&nbsp;</label>
+                    </div>
+                    
+                    
+                    
+
+                    <p id="SUCCESS-login" class="mt-4" style="display: none; color: var(--success-font)" >SUCCESS LOGIN</p>
+                    <p id="email_not_registered" class="mt-4" style="display: none; color: var(--fail-font)">Email Not Registered...</p>
+                    <p id="wrong_password" class="mt-4" style="display: none; color: var(--fail-font)">Incorrect Password...</p>
+                    <p id="no-data" class="mt-4" style="display: none; color: var(--fail-font)">Input Must Be Filled</p>
 
                     <div class="d-inline-flex align-items-center justify-content-between mt-4">
-                        <button class="button me-2" style="width: 50%;">Login</button>
+                        <button class="button me-2" id="login-action" style="width: 50%;">Login&nbsp;&nbsp;<div class="fa-2x"><i class="fas fa-circle-notch fa-spin"></i></div></button>
                         <button class="button clear-input-action" style="width: 50%; background: var(--red-accent)">Clear Inputs</button>
                     </div>
+                    <p id="" class="mt-4">Do not have account yet? | <span class="register-show" style="color:var(--link-font); cursor:pointer">Register</span> </p>
                 </form>
             </div>
             <div id="register-body">
@@ -79,11 +91,11 @@
                     <input type="password" name="verify_pass" class="form-input" required="">
 
 
-                    <p id="SUCCESS-regis" class="mt-4" style="display: none">SUCCESS REGISTER, you can check out on the db sir, no user session created.</p>
-                    <p id="username-already-exist" class="mt-4" style="display: none">Username Already Exist...</p>
-                    <p id="unmatch-password" class="mt-4" style="display: none">Password Does Not Match...</p>
-                    <p id="no-data" class="mt-4" style="display: none">Input Must Be Filled</p>
-                    <p id="unmatch-pass-length" class="mt-4" style="display: none">Password Too Short...</p>
+                    <p id="SUCCESS-regis" class="mt-4" style="display: none; color: var(--success-font)">SUCCESS REGISTER</p>
+                    <p id="username-already-exist" class="mt-4" style="display: none; color: var(--fail-font)">Username Already Exist...</p>
+                    <p id="unmatch-password" class="mt-4" style="display: none; color: var(--fail-font)">Password Does Not Match...</p>
+                    <p id="no-data" class="mt-4" style="display: none; color: var(--fail-font)">Input Must Be Filled</p>
+                    <p id="unmatch-pass-length" class="mt-4" style="display: none; color: var(--fail-font)">Password Too Short...</p>
 
                     <div class="d-inline-flex align-items-center flex-wrap mt-4">
 
@@ -113,6 +125,30 @@
                     </a>
                 </div>
             </div>
+
+            <?php
+                if(isset($_SESSION['sessionId'])){
+            ?>
+            <div id="header-nav">
+                <ul class="d-inline-flex">
+                    <li><a href="#view-subjects">courses</a></li>
+                    <li><a>tutors</a></li>
+                    <li><a>subscription</a></li>
+                    <li><a>profile</a></li>
+                </ul>
+            </div>
+
+            <div class="user-avatar-rounded me-2" style="background-image:url('assets/user_images/<?php echo $_SESSION['user_data']['username']."_".$_SESSION['user_data']['user_image']?>')"></div>
+            <?php
+                }else{
+            ?>
+
+            <div id="header-nav" class="d-inline-flex align-items-center">
+                <p class="mb-0 me-2">Login To View The Nav Menus</p>
+                <a class="button me-2 login-show">Login</a>
+            </div>
+
+            <?php } ?>
             <div id="header-inner-right">
                 <div class="dark-switch">
                     <input id="dark-switch-input" type="checkbox" checked="">
@@ -120,7 +156,7 @@
                 </div>
             </div>
         </header>
-        <section id="hero">
+        <section id="hero" class="pb-0">
             <svg width="722" height="320" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="illustration-01" x1="-4.14" y1="43.12" x2="303.145" y2="391.913" gradientUnits="userSpaceOnUse">
@@ -184,16 +220,126 @@
                     <p>
                         Hello there — <span class="fw-bold">My Tutor</span> by <span class="fw-bold">Priananda</span> is a fully featured web and app platform for finding your right tutor. Browse thousands of tutor and start expanding your knowledge to the higest.
                     </p>
+                    <?php
+                        if(!isset($_SESSION['sessionId'])){
+                    ?>
                     <div id="hero-buttons-wrap" class="d-inline-flex mt-3">
                         <a class="button me-2 login-show">Login</a>
                         <a class="button register-show">Register</a>
                     </div>
+                    <?php
+                        }else{
+                    ?>
+                    <div id="hero-buttons-wrap" class="d-inline-flex mt-3">
+                    <a href="#view-subjects" class="button me-2">View Subjects</a>
+                        <a class="button me-2 logout-action" href="api/logout.php">Logout</a>
+                    </div>
+                    <?php } ?>
                 </div>
 
                 <div class="d-flex align-items-center px-2 justify-content-center" id="hero-right">
                     <object id="svg-hero" data="assets/svg/undraw_work_time_re_hdyv.svg" type="image/svg+xml"></object>
 
                 </div>
+            </div>
+        </section>
+
+        <section id="view-subjects" class="pb-0" style="padding-top: 8em;">
+            <h2>Subject Courses Available</h2>
+        </section>
+
+        <?php
+            require_once 'api/db_config.php';
+            $sqlcnt = new mysqli($db_host,$db_username,$db_password,$db_name);
+
+
+            
+
+            $view = 10;
+            if (isset ($_GET['page'])){
+                $active_page = $_GET['page'];
+            }  else {
+                $active_page = 1;
+            }
+            $start = ($active_page-1)*$view;
+            $limit = " LIMIT $start, $view";
+
+            $sql = "SELECT * FROM tbl_subjects";
+
+            $query = $sqlcnt->query($sql.$limit);
+            $row = $query->fetch_assoc();
+        ?>
+
+        <section class="pt-5">
+            <div id="subjects-flex-wrapper">
+                <?php
+                    do{
+                ?>
+                <div class="subject-item">
+                    <div>
+                        <h3><?php echo $row['subject_name']?></h3>
+                        
+                        <p><?php echo $row['subject_description']?></p>
+
+                        <div class="d-flex flex-row">
+                            <div class="subject-tiny-rounded">RM<?php echo $row['subject_price']?></div>
+                            <div class="subject-tiny-rounded"><?php echo $row['subject_sessions']?> sessions</div>
+                            <div class="subject-tiny-rounded"><?php echo $row['subject_rating']?> <i class="fa-solid fa-star"></i></div>
+                        </div>
+                    </div>
+                    <div class="subject-image">
+                        <div style="background-image:url('assets/courses/<?php echo $row['subject_id']?>.png')"></div>
+                    </div>
+                    
+                </div>
+                <?php
+                    }while($row = $query->fetch_assoc());
+
+                    $sqltotal = $sql;
+                    $qtotal = $sqlcnt->query($sqltotal);
+                    $total_data = $qtotal->num_rows;
+                    // echo "<h1>".$total_data."</h1>";
+                    $total_page = ceil($total_data/$view);
+                ?>
+                
+                
+                
+            </div>
+            <div class="page-selector-wrapper d-flex">
+                <ul class="d-inline-flex">
+                    <?php for ($i = 1; $i <= $total_page; $i++) { ?>
+                        <?php if ($i == $active_page) { ?>
+                            <li class="d-flex">
+                                <p><strong><?php echo $i; ?></strong></p>
+                            </li>
+                        <?php } else { ?>
+                            <li class="d-flex">
+                                <a href="
+							<?php if (isset($_GET['search-query'])) {
+                                echo "?search-query=";
+                                echo $_GET['search-query'];
+                                echo "&";
+                            } else if (isset($_GET['latest'])) {
+                                echo "?latest=";
+                                echo $_GET['latest'];
+                                echo "&";
+                            } else if (isset($_GET['non-answered'])) {
+                                echo "?non-answered=";
+                                echo $_GET['non-answered'];
+                                echo "&";
+                            } else {
+                                echo "?";
+                            }
+                            ?>
+							page=<?php echo $i."#view-subjects"; ?>">
+                                    
+                                        <?php echo $i; ?>
+                                    
+                                </a>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
+                </ul>
             </div>
         </section>
 
